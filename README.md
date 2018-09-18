@@ -6,6 +6,6 @@ This folder will be where you complete your pre-class each week. The first time 
 Before you continue, Edit this document with:
 
 
-- Preferred Name: _________________________________
-- Brown Name: ___________________________
-- Brown E-mail: ______________________
+- Preferred Name: Lucas
+- Brown Name: Lucas Paulo de Lima Camillo
+- Brown E-mail: lucas_camillo@brown.edu
