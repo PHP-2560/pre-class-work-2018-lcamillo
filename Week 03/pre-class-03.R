@@ -71,14 +71,12 @@ gm1992  = gapminder %>%
 class(gm1992)
 
 #10)
-#
+#Check output
 gapminder %>%
   arrange(country, year) %>%
   group_by(country) %>%
   mutate(lifeDiff = lifeExp - lag(lifeExp), popDiff = pop - lag(pop), gdpDiff = gdpPercap - lag(gdpPercap)) %>%
-  ungroup() %>%
-  filter(lifeDiff > 0, popDiff < 0) %>%
-  summarise(corLife = cor(lifeDiff, gdpPercap), cor(popDiff, gdpPercap))
+  filter(lifeDiff > 0, popDiff < 0)
 
   
   
