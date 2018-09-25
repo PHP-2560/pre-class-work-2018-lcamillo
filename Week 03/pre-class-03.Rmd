@@ -11,69 +11,109 @@ gapminder = gapminder # dataset is called gapminder
 
 1. How many unique countries are represented per continent?
 ```{r}
-
+# 52 in Africa, 25 in Americas, 33 in Asia, 30 in Europe, 2 in Oceania
+gapminder %>%
+  group_by(continent) %>%
+  distinct(country) %>%
+  count()
 
 ```
 
 
 2. Which European nation had the lowest GDP per capita in 1997?
 ```{r}
-
+# It is Albania with 3193 for gdpPercap
+gapminder %>%
+  filter(continent == "Europe", year == "1997") %>%
+  arrange(gdpPercap)
 
 ```
 
 
 3. According to the data available, what was the average life expectancy across each continent in the 1980s?
 ```{r}
-
+# 52.5 in Africa, 67.2 in Americas, 63.7 in Asia, 73.2 in Europe, 74.8 in Oceania
+gapminder %>%
+  filter(year >= 1980, year < 1990) %>%
+  group_by(continent) %>%
+  summarise(avg_life = mean(lifeExp))
 
 ```
 
 
 4. What 5 countries have the highest total GDP over all years combined?
 ```{r}
-
+# Kuwait, Switzerland, Norway, United State, and Canada respectively
+gapminder %>%
+  group_by(country) %>%
+  summarise(avg_gdp = sum(gdpPercap)) %>%
+  arrange(desc(avg_gdp))
 
 ```
 
 
 5. What countries and years had life expectancies of at least 80 years? N.b. only output the columns of interest: country, life expectancy and year (in that order).
 ```{r}
-
+#there were 22 data points with lifeExp of at least 80 years. Check output
+gapminder %>%
+  group_by(country, year) %>%
+  filter(lifeExp >= 80) %>%
+  select(country, year, lifeExp)
 
 ```
 
 
 6. What 10 countries have the strongest correlation (in either direction) between life expectancy and per capita GDP?
 ```{r}
-
+# Brazil, Mauritania, France, Switzerland, Pakistan, Indonesia, Equatorial Guinea, Comoros, Nicaragua, and Guatemala respectively
+gapminder %>%
+  group_by(country) %>%
+  summarise(correlation = cor(year, lifeExp)) %>%
+  arrange(desc(abs(correlation)))
 
 ```
 
 
 7.  Which combinations of continent (besides Asia) and year have the highest average population across all countries? N.b. your output should include all results sorted by highest average population. With what you already know, this one may stump you. See this Q&A for how to ungroup before arrangeing. This also behaves differently in more recent versions of dplyr.
 ```{r}
-
+# America in the more recent years has the highest average population per country
+gapminder %>%
+  filter(continent != "Asia") %>%
+  group_by(continent, year) %>%
+  summarize(avg_pop = mean(pop)) %>%
+  arrange(desc(avg_pop))
   
 ```
 
 
 8.  Which three countries have had the most consistent population estimates (i.e. lowest standard deviation) across the years of available data?
 ```{r}
-
+# Sao Tome and Principe (45906), Iceland (48542), and Montenegro (99738)
+gapminder %>%
+  group_by(country) %>%
+  summarise(sd_pop = sd(pop)) %>%
+  arrange(sd_pop)
 
 ```
 
 
 9.  Subset gm to only include observations from 1992 and store the results as gm1992. What kind of object is this?
 ```{r}
-
+# gm1992 is a tibble
+gm1992  = gapminder %>%
+  filter(year == "1992")
+class(gm1992)
 
 ```
 
 
 10.  Which observations indicate that the population of a country has decreased from the previous year and the life expectancy has increased from the previous year? See the vignette on window functions.
 ```{r}
-
+#Check output
+gapminder %>%
+  arrange(country, year) %>%
+  group_by(country) %>%
+  mutate(lifeDiff = lifeExp - lag(lifeExp), popDiff = pop - lag(pop), gdpDiff = gdpPercap - lag(gdpPercap)) %>%
+  filter(lifeDiff > 0, popDiff < 0)
 
 ```
