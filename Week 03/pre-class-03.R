@@ -1,4 +1,4 @@
-#preclass03
+#PHP2560 preclass03
 #Lucas Paulo de Lima Camillo
 #B01478147
 
@@ -7,8 +7,9 @@ library(dplyr)
 library(gapminder)
 gapminder = gapminder # dataset is called gapminder
 
+
 #1)
-#52 in Africa, 25 in Americas, 33 in Asia, 30 in Europe, 2 in Oceania
+# 52 in Africa, 25 in Americas, 33 in Asia, 30 in Europe, 2 in Oceania
 gapminder %>%
   group_by(continent) %>%
   distinct(country) %>%
@@ -21,9 +22,18 @@ gapminder %>%
   arrange(gdpPercap)
 
 #3)
+# 52.5 in Africa, 67.2 in Americas, 63.7 in Asia, 73.2 in Europe, 74.8 in Oceania
+gapminder %>%
+  filter(year >= 1980, year < 1990) %>%
+  group_by(continent) %>%
+  summarise(avg_life = mean(lifeExp))
 
-
-
+#4)
+# Kuwait, Switzerland, Norway, United State, and Canada respectively
+gapminder %>%
+  group_by(country) %>%
+  summarise(avg_gdp = sum(gdpPercap)) %>%
+  arrange(desc(avg_gdp))
 
 
 
