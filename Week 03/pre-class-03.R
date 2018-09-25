@@ -50,7 +50,7 @@ gapminder %>%
   arrange(desc(abs(correlation)))
 
 #7)
-# America in the more recent years
+# America in the more recent years has the highest average population per country
 gapminder %>%
   filter(continent != "Asia") %>%
   group_by(continent, year) %>%
@@ -64,11 +64,21 @@ gapminder %>%
   summarise(sd_pop = sd(pop)) %>%
   arrange(sd_pop)
 
+#9)
+# gm1992 is a tibble
+gm1992  = gapminder %>%
+  filter(year == "1992")
+class(gm1992)
 
-
-
-
-
+#10)
+#
+gapminder %>%
+  arrange(country, year) %>%
+  group_by(country) %>%
+  mutate(lifeDiff = lifeExp - lag(lifeExp), popDiff = pop - lag(pop), gdpDiff = gdpPercap - lag(gdpPercap)) %>%
+  ungroup() %>%
+  filter(lifeDiff > 0, popDiff < 0) %>%
+  summarise(corLife = cor(lifeDiff, gdpPercap), cor(popDiff, gdpPercap))
 
   
   
