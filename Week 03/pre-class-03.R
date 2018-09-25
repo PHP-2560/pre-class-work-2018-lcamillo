@@ -35,7 +35,21 @@ gapminder %>%
   summarise(avg_gdp = sum(gdpPercap)) %>%
   arrange(desc(avg_gdp))
 
+#5)
+#there were 22 data points with lifeExp of at least 80 years
+gapminder %>%
+  group_by(country, year) %>%
+  filter(lifeExp >= 80) %>%
+  select(country, year, lifeExp)
 
+#6)
+# Brazil, Mauritania, France, Switzerland, Pakistan, Indonesia, Equatorial Guinea, Comoros, Nicaragua, and Guatemala respectively
+gapminder %>%
+  group_by(country) %>%
+  summarise(correlation = cor(year, lifeExp)) %>%
+  arrange(desc(abs(correlation)))
+
+#7)
 
 
 
