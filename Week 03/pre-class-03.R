@@ -36,7 +36,7 @@ gapminder %>%
   arrange(desc(avg_gdp))
 
 #5)
-#there were 22 data points with lifeExp of at least 80 years
+#there were 22 data points with lifeExp of at least 80 years. Check output
 gapminder %>%
   group_by(country, year) %>%
   filter(lifeExp >= 80) %>%
@@ -50,6 +50,31 @@ gapminder %>%
   arrange(desc(abs(correlation)))
 
 #7)
+# America in the more recent years
+gapminder %>%
+  filter(continent != "Asia") %>%
+  group_by(continent, year) %>%
+  summarize(avg_pop = mean(pop)) %>%
+  arrange(desc(avg_pop))
+
+#8)
+# Sao Tome and Principe (45906), Iceland (48542), and Montenegro (99738)
+gapminder %>%
+  group_by(country) %>%
+  summarise(sd_pop = sd(pop)) %>%
+  arrange(sd_pop)
+
+
+
+
+
+
+
+  
+  
+
+
+
 
 
 
