@@ -27,6 +27,21 @@ rep_length <- function(x, y) {
 #In order to make them more consistent, they could both have the same type of output. Also, MASS::mvrnorm() could have mu = 0 and sigma = 1 as standard, since that would be the standard normal distribution.
 
 
+#3)
+#coefficient of variation of the columns in the mtcars dataset 
+lapply(mtcars, function(x) sd(x)/mean(x))
+
+
+#4)
+#a-
+#standard deviation of every column in a numeric data frame, e.g., mtcars
+vapply(mtcars, sd, numeric(1))
+
+#b-
+#standard deviation of every numeric column in a mixed data frame, e.g., iris
+vapply(iris[,vapply(iris, is.numeric, logical(1))], partial(sd,na.rm=TRUE), numeric(1))
+
+
 
 
 
