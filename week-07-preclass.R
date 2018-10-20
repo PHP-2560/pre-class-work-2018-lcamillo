@@ -71,11 +71,11 @@ mean(simulation5) #-200732
 simulation6 = replicate(100, unfair_game(prob = 0.46))
 mean(simulation6) #-201574
 #fair:
-simulation7 = replicate(100, unfair_game(prob = 0.54))
+simulation7 = replicate(100, unfair_game(prob = 0.74)) #5436
 mean(simulation7)
 
 #c-
-#(sort of)fair
+#(sort of)fair:
 simulation8 = replicate(100, unfair_game(increment = 0.012))
 mean(simulation8) #25340
 
