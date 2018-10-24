@@ -2,6 +2,7 @@
 #Lucas Paulo de Lima Camillo
 #B01478147
 
+
 #1)
 #returns times to lose, and money
 gamble = function(money = 1000, limit = 5000){
